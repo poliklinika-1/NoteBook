@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        <label class="small mb-1" for="inputEmailAddress">Email адрес</label>
+        <input class="form-control py-4" name="Email" type="email" placeholder="Введите email адрес" />
+    </div>
+    <div class="form-group">
+        <label class="small mb-1" for="inputPassword">Пароль</label>
+        <input class="form-control py-4" name="Password" type="password" placeholder="Введите пароль" />
+    </div>
+    <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
+        <a class="small" href="password.html">Восстаность пароль</a>
+        <button type="submit" class="btn btn-primary">Войти</button>
+    </div>    
+}

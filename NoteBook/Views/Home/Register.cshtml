@@ -1,0 +1,42 @@
+﻿@model NoteBook.Models.User
+@{
+    ViewData["Title"] = "Home Page";
+}
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="small mb-1" for="FirstName">Фамилия</label>
+                <input class="form-control py-4" id="FirstName" name="FirstName" type="text" placeholder="Введите фамилию" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="small mb-1" for="LastName">Имя</label>
+                <input class="form-control py-4" id="LastName" name="LastName" type="text" placeholder="Введите имя" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="small mb-1" for="Email">Email</label>
+        <input class="form-control py-4" id="Email" name="Email" type="email" aria-describedby="emailHelp" placeholder="Введите email адрес" />
+    </div>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="small mb-1" for="Password">Пароль</label>
+                <input class="form-control py-4" id="Password" name="Password" type="password" placeholder="Введите пароль" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="small mb-1">Повторите пароль</label>
+                <input class="form-control py-4" type="password" placeholder="Повторите пароль" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Создать аккаунт</button>
+
+}
