@@ -9,6 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace NoteBook.Controllers
 {
@@ -168,6 +169,8 @@ namespace NoteBook.Controllers
         [HttpGet]
         public IActionResult NoteAdd()
         {
+            SelectList selectList = new SelectList(db.NoteBooks, "Id", "Title");
+            ViewBag.NoteBooks = selectList;
             return View();
         }
 
@@ -178,7 +181,7 @@ namespace NoteBook.Controllers
             if (ModelState.IsValid)
             {                
                 note.Id_user = 1;
-                note.Id_notepad = 1;
+                //note.Id_notepad = 1;
                 //note.Note_date = DateTime.Parse(data);
                 note.Note_date = data;
                 db.Notes.Add(note);
@@ -193,6 +196,8 @@ namespace NoteBook.Controllers
             var note = (from p in db.Notes
                           where p.Id == Id
                           select p).First();
+            SelectList selectList = new SelectList(db.NoteBooks, "Id", "Title");
+            ViewBag.NoteBooks = selectList;
             return View(note);
         }
 
@@ -219,20 +224,37 @@ namespace NoteBook.Controllers
         }
 
         [HttpPost]
-        public IActionResult NoteBookAdd(Note note)
+        public IActionResult NoteBookAdd(NoteBooks notebook)
         {
             var data = DateTime.Now;
             if (ModelState.IsValid)
             {
-                note.Id_user = 1;
-                note.Id_notepad = 1;
                 //note.Note_date = DateTime.Parse(data);
-                note.Note_date = data;
-                db.Notes.Add(note);
+                notebook.Notebook_date = data;
+                db.NoteBooks.Add(notebook);
                 db.SaveChanges();
-            }
+                ViewBag.Message = "Данные сохранены!";
+            }            
             return View();
         }
+
+        [HttpGet]
+        public IActionResult NoteBooksView()
+        {
+            /*var notebooks = from p in db.NoteBooks
+                        select p;*/
+            var notebooks = (from p in db.NoteBooks                        
+                        join notebook in db.Notes on p.Id equals notebook.Id_notepad
+                        select new NoteWithBook
+                        {
+                            NoteBooks = p,                            
+                            Note = notebook                            
+                        });            
+            ViewBag.count = notebooks.Count();
+            return View(notebooks);
+        }
+
+
 
     }
 }

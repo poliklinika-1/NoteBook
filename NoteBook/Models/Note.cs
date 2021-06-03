@@ -19,5 +19,5 @@ namespace NoteBook.Models
         public DateTime Note_date { get; set; }
         public int Id_user { get; set; }
         public int Id_notepad { get; set; }
-    }
+    }    
 }

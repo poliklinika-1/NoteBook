@@ -11,6 +11,6 @@ namespace NoteBook.Models
         public UserContext(DbContextOptions<UserContext> options) : base(options) { }
         public DbSet<User> Users { get; set; }
         public DbSet<Note> Notes { get; set; }
-        public DbSet<NoteBook> NoteBooks { get; set; }
+        public DbSet<NoteBooks> NoteBooks { get; set; }
     }
 }

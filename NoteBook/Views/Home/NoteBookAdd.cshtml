@@ -4,16 +4,24 @@
 @{
     Layout = "_Layout_main";
 }
-@model NoteBook.Models.Note
 @using (Html.BeginForm("NoteBookAdd", "Home", FormMethod.Post))
 {
+    @Html.ValidationSummary()
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Блокноты</h1>
             <label class="small mb-1" for="Note">Наименование блокнота</label>
-            <textarea name="Note_text" id="Note_text"></textarea>            
+            <textarea name="Title" id="Title"></textarea>
             <br>
             <button type="submit" class="btn btn-primary btn-block" style="height:50px;width:100px">Сохранить</button>
         </div>
     </main>
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
 }

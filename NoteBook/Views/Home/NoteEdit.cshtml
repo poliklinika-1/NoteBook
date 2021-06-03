@@ -13,11 +13,13 @@
 </script>
 @using (Html.BeginForm("NoteEdit", "Home", FormMethod.Post))
 {
+    @Html.ValidationSummary()
     <main>
         <div class="container-fluid">
             <h1 class="mt-4">Заметки</h1>
             <label class="small mb-1" for="Note">Наименование заметки</label>
-            @Html.TextBoxFor(x => x.Title, new { @class = "form-control py-4", placeholder = "Введите наименование заметки" })            
+            @Html.TextBoxFor(x => x.Title, new { @class = "form-control py-4", placeholder = "Введите наименование заметки" })
+            @Html.DropDownListFor(m => m.Id_notepad, ViewBag.NoteBooks as SelectList)
             @Html.TextAreaFor(m => m.Note_text)
             <br>
             <button type="submit" class="btn btn-primary btn-block" style="height:50px;width:100px">Сохранить</button>
